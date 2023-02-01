@@ -20,7 +20,10 @@ def main():
         print(" [x] Done")
         channel.basic_ack(delivery_tag=method.delivery_tag)
 
-    channel.basic_consume(queue='hello',
+    # Permet de ne pas charger le consumer et d'attendre qu'il est finit un message avant d'en envoyer un autre :
+    channel.basic_qos(prefetch_count=1)
+
+    channel.basic_consume(queue='task_queue',
                           # auto_ack=True,
                           on_message_callback=callback)
     # auto-ack = Acknowledgments : renvoie un message au boroker "message bien reçu".
