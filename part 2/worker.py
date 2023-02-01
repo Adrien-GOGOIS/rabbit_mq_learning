@@ -9,8 +9,9 @@ def main():
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
 
-    # Créer une queue (sinon le message sera automatiquement jeté) :
-    channel.queue_declare(queue='hello')
+    # Créer une queue durable (on change le nom car erreur si création d'une queue avec le même nom):
+    # Evite de perdre les messages si serveur down
+    channel.queue_declare(queue='task_queue', durable=True)
 
     # Pour chaque point de suspension contenu dans le message, on feint une seconde de travail :
     def callback(channel, method, properties, body):
