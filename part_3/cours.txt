@@ -1,0 +1,13 @@
+Le but ici est d'abonner plusieurs consumer à un seul canal. Ainsi lorsqu'un message (ici un log) est publié, ils le recevront tous.
+- le "producer" est l'application qui envoie un message
+- la "queue" est le buffer qui stocke le message
+- le "consumer" reçoit le message
+Mais le consumer ne balance jamais un message directement dans une queue, souvent il ne sait même pas si la queue a reçu le message.
+C'est "l'exchange" qui se charge de distribuer les messages dans les queues. Il sait où les placer car on définit des règles pour l'exchange.
+Type d'exchange : 'direct', 'topic', 'headers' et 'fanout'
+
+channel.exchange_declare(exchange='logs',
+                         exchange_type='fanout')
+         --> Fanout : le plus simple, il distribue tous les messages qu'il reçoit, dans toutes les queues qu'il connait.
+
+Pour lister les exchange sur le serveur : - sudo rabbitmqctl list_exchanges
