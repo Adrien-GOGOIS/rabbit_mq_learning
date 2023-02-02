@@ -1,0 +1,5 @@
+Ici, on va filtrer les messages reçu basé sur leur sévérité.
+Par exemple, on écrira sur le disque seulement les messages d'erreurs critiques.
+On va utiliser un exchange 'direct' : le message va dans la queue où 'binding_key' === 'routing_key'
+Tous les autres messages seront jetés.
+2 binding_key peuvent être idetiques, dans ce cas l'exchange 'direct' publiera dans les deux
