@@ -11,6 +11,8 @@ result = channel.queue_declare(queue='', exclusive=True)
 queue_name = result.method.queue
 
 channel.queue_bind(exchange='logs', queue=queue_name)
+# Binding : relation entre exchange et queue.
+# Autrement dit : "cette queue est intéressé par les messages qui viennent de cet exchange"
 
 print(' [*] Waiting for logs. To exit press CTRL+C')
 
